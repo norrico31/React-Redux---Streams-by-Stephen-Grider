@@ -34,18 +34,18 @@ export const createStream = formValues => async (dispatch, getState) => {
 }
 
 export const fetchStreams = () => async dispatch => {
-    const res = await streams.get('/streams')
+    const { data } = await streams.get('/streams')
     dispatch({
         type: FETCH_STREAMS,
-        payload: res.data
+        payload: data
     })
 }
 
 export const fetchStream = id => async dispatch => {
-    const res = await streams.get(`/streams/${id}`)
+    const { data } = await streams.get(`/streams/${id}`)
     dispatch({
         type: FETCH_STREAM,
-        payload: res.data
+        payload: data
     })
 }
 
@@ -64,4 +64,5 @@ export const deleteStream = id => async dispatch => {
         type: DELETE_STREAM,
         payload: id
     })
+    history.push('/')
 }

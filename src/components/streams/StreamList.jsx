@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchStreams } from '../../actions'
@@ -8,11 +9,12 @@ class StreamList extends React.Component {
         this.props.fetchStreams()
     }
     renderAdmin(stream) {
+        if (this.props.currentUserId === null) return
         if (stream.userId === this.props.currentUserId) {
             return (
                 <div className="right floated content">
                     <Link to={`/streams/edit/${stream.id}`} className="ui button primary">Edit</Link>
-                    <button className="ui button negative">Delete</button>
+                    <Link to={`/streams/delete/${stream.id}`} className="ui button negative">Delete</Link>
                 </div>
             )
         }
@@ -43,7 +45,6 @@ class StreamList extends React.Component {
         }
     }
     render() {
-        console.log(this.props.streams)
         return (
             <div>
                 <h2>Streams</h2>
@@ -54,6 +55,13 @@ class StreamList extends React.Component {
             </div>
         )
     }
+}
+
+StreamList.propTypes = {
+    fetchStreams: PropTypes.func.isRequired,
+    streams: PropTypes.array.isRequired,
+    currentUserId: PropTypes.string,
+    isSignedIn: PropTypes.bool
 }
 
 const mapStateToProps = state => ({
