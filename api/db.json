@@ -9,6 +9,12 @@
       "description": "this is the 2nd stream",
       "title": "2nd Stream",
       "id": 2
+    },
+    {
+      "title": "try this stream",
+      "description": "practice practice practice",
+      "userId": "104608332505271061222",
+      "id": 3
     }
   ]
 }
