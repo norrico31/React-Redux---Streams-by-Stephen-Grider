@@ -1,21 +1,29 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 
-const Modal = props => {
+const Modal = ({ title, content, actions, onDismiss }) => {
     return ReactDOM.createPortal(
-        <div className="ui dimmer modals visible active" onClick={props.onDismiss}>
+        <div className="ui dimmer modals visible active" onClick={onDismiss}>
             <div className="ui standard modal visible active" onClick={e => e.stopPropagation()}>
-                <div className="header">{props.title}</div>
-                <div className="content">
-                    {props.content}
-                </div>
+                <div className="header">{title}</div>
+                    <p className="content">
+                        {content}
+                    </p>
                 <div className="actions">
-                    {props.actions}
+                    {actions}
                 </div>
             </div>
         </div>,
         document.getElementById('modal')
     )
+}
+
+Modal.propTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired,
+    onDismiss: PropTypes.func.isRequired,
 }
 
 export default Modal
